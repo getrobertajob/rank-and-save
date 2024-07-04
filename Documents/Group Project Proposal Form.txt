@@ -1,0 +1,61 @@
+Group Project Proposal Forms:
+__
+MERN please use this to submit your proposal.
+
+Which group members are responsible for what?
+
+Description of project:
+Home page
+-Banner in the top center of page.
+-Table component on left side.
+-Form component on the right side.
+
+Table component
+-table to display all tips records.
+    Rank (int)
+    Title (str)
+    Author (str)
+    Up/Down vote arrows
+-table shows top 20 records or so but is scrollable for the rest.
+-while scrolling the table headers stays in place.
+-tracks if user already voted for each record based on cookies.
+-if false then both arrows enabled.
+-if true both arrows are disabled.
+
+Form component
+-form has 4 buttons at the top, New, Edit, Delete, and Save.
+-clicking on a row from table loads data from that record into the forms inputs.
+-presents Title, Author, and Description.
+-clicking new makes the inputs editable and clears out the inputs.
+-clicking edit after selecting a record makes the inputs editable.
+-clicking delete will present a popup prompt the user for confirmation before deleting the record.
+-form validation will be based on model file and present error messages if failed.
+
+
+Github link for project: 
+https://github.com/getrobertajob/rank-and-save
+
+Will you have a gitignore? 
+yes
+
+
+How will you implement full CRUD?
+yes
+Create new money saving tip record.
+Read all records order by vote count for HTML table.
+Edit existing records.
+Delete existing records. 
+
+
+What are your validations for create and update?
+Title: required, min 2, max 30
+Author: min 2, max 30
+Description: min 2, max 255
+
+
+What are your stretch goals if any?
+Add log in and user registry
+
+
+Please include a copy (image or hyperlink) for your wireframe.
+Included in zip file. 
