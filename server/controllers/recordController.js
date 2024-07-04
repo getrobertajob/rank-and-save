@@ -1,5 +1,7 @@
+// imports
 import Record from "../models/recordModel.js";
 
+// function to create new record
 export const createRecord = async (req, res) => {
   try {
     const newRecord = new Record(req.body);
@@ -10,6 +12,7 @@ export const createRecord = async (req, res) => {
   }
 };
 
+// function to get all records order by vote column as ascending
 export const getAllRecords = async (req, res) => {
   try {
     const records = await Record.find().sort({ Votes: -1 });
@@ -19,6 +22,7 @@ export const getAllRecords = async (req, res) => {
   }
 };
 
+// function to get one record by ID
 export const getRecordById = async (req, res) => {
   try {
     const record = await Record.findById(req.params.id);
@@ -31,6 +35,7 @@ export const getRecordById = async (req, res) => {
   }
 };
 
+// function to update one record by ID
 export const updateRecord = async (req, res) => {
   try {
     const updatedRecord = await Record.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -40,6 +45,7 @@ export const updateRecord = async (req, res) => {
   }
 };
 
+// function to delete one record by ID
 export const deleteRecord = async (req, res) => {
   try {
     await Record.findByIdAndDelete(req.params.id);
