@@ -1,0 +1,78 @@
+.App {
+    text-align: center;
+  }
+  
+  .Banner img {
+    width: 50%;
+  }
+
+  h1{
+    margin-top: 0;
+    color: green;
+    
+  }
+  
+  .main {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  .Table {
+    width: 50%;
+    border-collapse: collapse;
+  }
+  
+  .Table th, .Table td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .Table tr:hover {
+    border: 3px solid yellow;
+  }
+  
+  .upvote {
+    color: green;
+    cursor: pointer;
+  }
+  
+  .downvote {
+    color: red;
+    cursor: pointer;
+  }
+  
+  .Form {
+    width: 45%;
+  }
+  
+  .form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .form-fields {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-fields label {
+    margin-bottom: 10px;
+  }
+  
+  .form-fields input, .form-fields textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+  }
+  
+  input[disabled], textarea[disabled] {
+    background-color: white;
+  }
+  
+  input[enabled], textarea[enabled] {
+    background-color: lightblue;
+  }
+  
