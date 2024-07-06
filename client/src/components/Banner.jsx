@@ -3,7 +3,8 @@ import React from 'react';
 function Banner() {
   return (
     <div className="Banner">
-      <img src="path/to/your/banner/image.jpg" alt="Banner" />
+      <img src="./Images/Banner.png" alt="Banner" />
+      <h1>Discover, Share, Vote, and Save!</h1>
     </div>
   );
 }
