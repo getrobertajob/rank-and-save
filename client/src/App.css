@@ -76,3 +76,36 @@
     background-color: lightblue;
   }
   
+  .upvote.voted {
+    color: green;
+  }
+  
+  .downvote.voted {
+    color: red;
+  }
+  
+  .upvote.voted, .upvote:disabled {
+    color: green;
+  }
+  
+  .downvote.voted, .downvote:disabled {
+    color: red;
+  }
+  
+
+  .upvoted {
+    background-color: lightgreen;
+  }
+  
+  .downvoted {
+    background-color: lightcoral;
+  }
+  
+  .upvote.voted, .upvote:disabled {
+    color: green;
+  }
+  
+  .downvote.voted, .downvote:disabled {
+    color: red;
+  }
+  

@@ -3,10 +3,20 @@ import axios from 'axios';
 
 function Table({ onSelectRecord }) {
   const [records, setRecords] = useState([]);
+  const [userVotes, setUserVotes] = useState(() => {
+    // Load initial votes from local storage
+    const savedVotes = localStorage.getItem('userVotes');
+    return savedVotes ? JSON.parse(savedVotes) : {};
+  });
 
   useEffect(() => {
     fetchRecords();
   }, []);
+
+  useEffect(() => {
+    // Save votes to local storage whenever they change
+    localStorage.setItem('userVotes', JSON.stringify(userVotes));
+  }, [userVotes]);
 
   const fetchRecords = async () => {
     try {
@@ -29,7 +39,25 @@ function Table({ onSelectRecord }) {
   const handleVote = async (id, change) => {
     try {
       const record = records.find((record) => record._id === id);
-      await axios.put(`${process.env.REACT_APP_API_URL}/records/${id}`, { Votes: record.Votes + change });
+      const currentVote = userVotes[id] || 0;
+
+      // Calculate the change in vote based on the current vote
+      let voteChange = change;
+      if (currentVote === change) {
+        voteChange = -change;
+      } else if (currentVote !== 0) {
+        voteChange = change * 2;
+      }
+
+      const updatedVotes = record.Votes + voteChange;
+
+      await axios.put(`${process.env.REACT_APP_API_URL}/records/${id}`, { Votes: updatedVotes });
+
+      setUserVotes((prevVotes) => ({
+        ...prevVotes,
+        [id]: currentVote === change ? 0 : change,
+      }));
+
       fetchRecords();
     } catch (err) {
       console.error(err);
@@ -48,13 +76,35 @@ function Table({ onSelectRecord }) {
       </thead>
       <tbody>
         {records.map((record, index) => (
-          <tr key={record._id}>
+          <tr
+            key={record._id}
+            className={
+              userVotes[record._id] === 1
+                ? 'upvoted'
+                : userVotes[record._id] === -1
+                ? 'downvoted'
+                : ''
+            }
+          >
             <td>{index + 1}</td>
             <td onClick={() => handleTitleClick(record._id)}>{record.Title}</td>
             <td>{record.Author}</td>
             <td>
-              <span className="upvote" onClick={() => handleVote(record._id, 1)}>▲</span>
-              <span className="downvote" onClick={() => handleVote(record._id, -1)}>▼</span>
+              <button
+                className={`upvote ${userVotes[record._id] === 1 ? 'voted' : ''}`}
+                onClick={() => handleVote(record._id, 1)}
+                disabled={userVotes[record._id] === 1}
+              >
+                ▲
+              </button>
+              <button
+                className={`downvote ${userVotes[record._id] === -1 ? 'voted' : ''}`}
+                onClick={() => handleVote(record._id, -1)}
+                disabled={userVotes[record._id] === -1}
+              >
+                ▼
+              </button>
+              {record.Votes}
             </td>
           </tr>
         ))}

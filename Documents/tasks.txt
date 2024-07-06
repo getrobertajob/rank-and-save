@@ -1,0 +1,17 @@
+-Bootstrap. -Matt
+-background color when fields are editable. 
+-Load database with money saving tips. -Matt
+
+-Track which records a user previously voted on. -Robert
+-Limit user to 1 vote per a record. -Robert
+-Add something to indicate which records were voted on by current user. -Robert
+
+-Refresh HTML data after vote and after form submit. -Robert
+-Remove form buttons that aren't needed at the time. -Robert
+
+Completed
+---------
+-add validations. -Matt
+-add description to model. -Matt
+
+-Pass description from HTML table to form. -Robert
