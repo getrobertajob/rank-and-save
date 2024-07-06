@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function Table({ onSelectRecord }) {
   const [records, setRecords] = useState([]);
@@ -10,7 +10,9 @@ function Table({ onSelectRecord }) {
 
   const fetchRecords = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/records`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/records`
+      );
       setRecords(response.data);
     } catch (err) {
       console.error(err);
@@ -19,7 +21,9 @@ function Table({ onSelectRecord }) {
 
   const handleTitleClick = async (id) => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/records/${id}`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/records/${id}`
+      );
       onSelectRecord(response.data);
     } catch (err) {
       console.error(err);
@@ -29,7 +33,9 @@ function Table({ onSelectRecord }) {
   const handleVote = async (id, change) => {
     try {
       const record = records.find((record) => record._id === id);
-      await axios.put(`${process.env.REACT_APP_API_URL}/records/${id}`, { Votes: record.Votes + change });
+      await axios.put(`${process.env.REACT_APP_API_URL}/records/${id}`, {
+        Votes: record.Votes + change,
+      });
       fetchRecords();
     } catch (err) {
       console.error(err);
@@ -37,7 +43,7 @@ function Table({ onSelectRecord }) {
   };
 
   return (
-    <table className="Table">
+    <table className="Table" striped bordered hover variant="dark">
       <thead>
         <tr>
           <th>Rank</th>
@@ -53,8 +59,18 @@ function Table({ onSelectRecord }) {
             <td onClick={() => handleTitleClick(record._id)}>{record.Title}</td>
             <td>{record.Author}</td>
             <td>
-              <span className="upvote" onClick={() => handleVote(record._id, 1)}>▲</span>
-              <span className="downvote" onClick={() => handleVote(record._id, -1)}>▼</span>
+              <span
+                className="upvote"
+                onClick={() => handleVote(record._id, 1)}
+              >
+                ▲
+              </span>
+              <span
+                className="downvote"
+                onClick={() => handleVote(record._id, -1)}
+              >
+                ▼
+              </span>
             </td>
           </tr>
         ))}

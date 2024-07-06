@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import Banner from './components/Banner';
-import Table from './components/Table';
-import Form from './components/Form';
+import React, { useState } from "react";
+import Banner from "./components/Banner";
+import Table from "./components/Table";
+import Form from "./components/Form";
 
 function App() {
   const [selectedRecord, setSelectedRecord] = useState(null);
@@ -9,7 +9,7 @@ function App() {
   const handleSelectRecord = (record) => {
     setSelectedRecord(record);
   };
-// test
+  // test
   return (
     <div className="App">
       <Banner />
