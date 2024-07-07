@@ -1,13 +1,13 @@
+Pending Tasks
+-------------
 -Bootstrap. -Matt
 -Present validation error messages in form. -Matt
 -background color when fields are editable. -Matt
-
-
 -Remove form buttons that aren't needed at the time. -Robert
 
 
-Completed
----------
+Completed Tasks
+---------------
 -add validations. -Matt
 -add description to model. -Matt
 -Load database with money saving tips. -Matt
