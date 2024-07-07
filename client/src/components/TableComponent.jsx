@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function Table({ onSelectRecord }) {
+function Table({ onSelectRecord, refreshTable }) {
   const [records, setRecords] = useState([]);
   const [userVotes, setUserVotes] = useState(() => {
     // Load initial votes from local storage
@@ -11,7 +11,7 @@ function Table({ onSelectRecord }) {
 
   useEffect(() => {
     fetchRecords();
-  }, []);
+  }, [refreshTable]);
 
   useEffect(() => {
     // Save votes to local storage whenever they change

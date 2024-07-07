@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function FormComponent({ selectedRecord }) {
+function FormComponent({ selectedRecord, onFormSubmit }) {
   const [formData, setFormData] = useState({ Title: '', Author: '', Description: '' });
   const [editMode, setEditMode] = useState(false);
   const [isNew, setIsNew] = useState(false);
@@ -34,6 +34,7 @@ function FormComponent({ selectedRecord }) {
       setFormData({ Title: '', Author: '', Description: '' });
       setEditMode(false);
       setIsNew(false);
+      onFormSubmit();
     } catch (err) {
       console.error(err);
     }
@@ -49,6 +50,7 @@ function FormComponent({ selectedRecord }) {
       setEditMode(false);
       setIsNew(false);
       alert('Save was successful');
+      onFormSubmit();
     } catch (err) {
       console.error(err);
     }
