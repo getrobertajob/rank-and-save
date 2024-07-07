@@ -10,6 +10,7 @@ function App() {
     setSelectedRecord(record);
   };
   // test
+  // test
   return (
     <div className="App">
       <Banner />
