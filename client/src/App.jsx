@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Banner from "./components/Banner";
-import Table from "./components/Table";
+import TableComponent from "./components/TableComponent";
 import Form from "./components/Form";
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
     <div className="App">
       <Banner />
       <div className="main">
-        <Table onSelectRecord={handleSelectRecord} />
+        <TableComponent onSelectRecord={handleSelectRecord} />
         <Form selectedRecord={selectedRecord} />
       </div>
     </div>
