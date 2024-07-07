@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Banner from "./components/Banner";
 import TableComponent from "./components/TableComponent";
-import Form from "./components/Form";
+import FormComponent from "./components/FormComponent";
 
 function App() {
   const [selectedRecord, setSelectedRecord] = useState(null);
@@ -17,7 +17,7 @@ function App() {
       <Banner />
       <div className="main">
         <TableComponent onSelectRecord={handleSelectRecord} />
-        <Form selectedRecord={selectedRecord} />
+        <FormComponent selectedRecord={selectedRecord} />
       </div>
     </div>
   );
