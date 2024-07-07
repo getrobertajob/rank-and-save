@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   margin: 0, auto;
-  background-color: black;
+  /* background-color: black; */
 }
 
 .Banner img {
@@ -79,4 +79,37 @@ textarea[disabled] {
 input[enabled],
 textarea[enabled] {
   background-color: lightblue;
+}
+
+.upvote.voted {
+  color: green;
+}
+
+.downvote.voted {
+  color: red;
+}
+
+.upvote.voted, .upvote:disabled {
+  color: green;
+}
+
+.downvote.voted, .downvote:disabled {
+  color: red;
+}
+
+
+.upvoted {
+  background-color: lightgreen;
+}
+
+.downvoted {
+  background-color: lightcoral;
+}
+
+.upvote.voted, .upvote:disabled {
+  color: green;
+}
+
+.downvote.voted, .downvote:disabled {
+  color: red;
 }
