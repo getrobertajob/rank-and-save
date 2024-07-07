@@ -1,10 +1,9 @@
 -Bootstrap. -Matt
+-Present validation error messages in form. -Matt
+-background color when fields are editable. -Matt
 
--Refresh HTML data after vote and after form submit. -Robert
+
 -Remove form buttons that aren't needed at the time. -Robert
-
--Present validation error messages in form.
--background color when fields are editable. 
 
 
 Completed
@@ -17,3 +16,4 @@ Completed
 -Track which records a user previously voted on. -Robert
 -Limit user to 1 vote per a record. -Robert
 -Add something to indicate which records were voted on by current user. -Robert
+-Refresh HTML data after vote and after form submit. -Robert
