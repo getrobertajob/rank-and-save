@@ -1,23 +1,28 @@
+// imports
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function Table({ onSelectRecord, refreshTable }) {
+function TableComponent({ onSelectRecord, refreshTable }) {
+  // declare use state
   const [records, setRecords] = useState([]);
   const [userVotes, setUserVotes] = useState(() => {
-    // Load initial votes from local storage
+    // declare variable to store the votes from user state to make data persistant
+    // loads initial votes from local storage on page load
     const savedVotes = localStorage.getItem('userVotes');
     return savedVotes ? JSON.parse(savedVotes) : {};
   });
 
+  // to populate html table on page load
   useEffect(() => {
     fetchRecords();
   }, [refreshTable]);
 
+  // to save votes to local storage when votes change
   useEffect(() => {
-    // Save votes to local storage whenever they change
     localStorage.setItem('userVotes', JSON.stringify(userVotes));
   }, [userVotes]);
 
+  // function to query database for all records for html table
   const fetchRecords = async () => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/records`);
@@ -27,6 +32,7 @@ function Table({ onSelectRecord, refreshTable }) {
     }
   };
 
+  // function to handle when user clicks on title of record in html table
   const handleTitleClick = async (id) => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/records/${id}`);
@@ -36,12 +42,14 @@ function Table({ onSelectRecord, refreshTable }) {
     }
   };
 
+  // function to handle when user clicks on up or down vote buttons
   const handleVote = async (id, change) => {
     try {
       const record = records.find((record) => record._id === id);
       const currentVote = userVotes[id] || 0;
 
-      // Calculate the change in vote based on the current vote
+      // to calculate the change in vote based on the current vote
+      // includes if user previously voted so it goes from +1 to -2 or -1 to +2
       let voteChange = change;
       if (currentVote === change) {
         voteChange = -change;
@@ -53,6 +61,7 @@ function Table({ onSelectRecord, refreshTable }) {
 
       await axios.put(`${process.env.REACT_APP_API_URL}/records/${id}`, { Votes: updatedVotes });
 
+      // to update the votes stored in user state
       setUserVotes((prevVotes) => ({
         ...prevVotes,
         [id]: currentVote === change ? 0 : change,
@@ -82,8 +91,8 @@ function Table({ onSelectRecord, refreshTable }) {
               userVotes[record._id] === 1
                 ? 'upvoted'
                 : userVotes[record._id] === -1
-                ? 'downvoted'
-                : ''
+                  ? 'downvoted'
+                  : ''
             }
           >
             <td>{index + 1}</td>
@@ -113,4 +122,4 @@ function Table({ onSelectRecord, refreshTable }) {
   );
 }
 
-export default Table;
+export default TableComponent;

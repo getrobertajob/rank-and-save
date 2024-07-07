@@ -1,11 +1,15 @@
+// imports
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function FormComponent({ selectedRecord, onFormSubmit }) {
+  // declare use state
   const [formData, setFormData] = useState({ Title: '', Author: '', Description: '' });
   const [editMode, setEditMode] = useState(false);
   const [isNew, setIsNew] = useState(false);
 
+  // to check if user has clicked on a record in html table yet
+  // and if so then populates form with data and sets use state
   useEffect(() => {
     if (selectedRecord) {
       setFormData(selectedRecord);
@@ -14,20 +18,26 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
     }
   }, [selectedRecord]);
 
+  // function to handle updating form data
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // function to handle if user clicks on new button
+  // includes clearing form data
   const handleNew = () => {
     setFormData({ Title: '', Author: '', Description: '' });
     setEditMode(true);
     setIsNew(true);
   };
 
+  // function to handle if user clicks on the edit button
+  // includes changing form inputs to editable
   const handleEdit = () => {
     setEditMode(true);
   };
 
+  // function to handle if user clicks on the delete button
   const handleDelete = async () => {
     try {
       await axios.delete(`${process.env.REACT_APP_API_URL}/records/${formData._id}`);
@@ -40,6 +50,8 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
     }
   };
 
+  // function to handle if user clicks on the save button
+  // includes popup to confirm save was sucessful
   const handleSave = async () => {
     try {
       if (isNew) {
