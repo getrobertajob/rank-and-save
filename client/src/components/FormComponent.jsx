@@ -72,6 +72,7 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
           formData
         );
       }
+      setFormData({ Title: "", Author: "", Description: "" });
       setEditMode(false);
       setIsNew(false);
       alert("Save was successful");
@@ -128,6 +129,7 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
           <InputGroup size="lg">
             <InputGroup.Text id="inputGroup-sizing-lg">Title:</InputGroup.Text>
             <Form.Control
+              name="Title"
               style={{ backgroundColor: `${color}` }}
               type="text"
               aria-label="Title"
@@ -143,6 +145,7 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
           <InputGroup size="lg">
             <InputGroup.Text id="inputGroup-sizing-lg">Author:</InputGroup.Text>
             <Form.Control
+              name="Author"
               style={{ backgroundColor: `${color}` }}
               aria-label="Author"
               aria-describedby="inputGroup-sizing-sm"
@@ -157,6 +160,7 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
           <InputGroup>
             <InputGroup.Text>Description:</InputGroup.Text>
             <Form.Control
+              name="Description"
               style={{ backgroundColor: `${color}` }}
               as="textarea"
               aria-label="Description"
