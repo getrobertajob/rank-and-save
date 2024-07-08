@@ -19,8 +19,14 @@ function App() {
     <div className="App">
       <Banner />
       <div className="main">
-        <TableComponent onSelectRecord={handleSelectRecord} refreshTable={refreshTable} />
-        <FormComponent selectedRecord={selectedRecord} onFormSubmit={handleFormSubmit} />
+        <TableComponent
+          onSelectRecord={handleSelectRecord}
+          refreshTable={refreshTable}
+        />
+        <FormComponent
+          selectedRecord={selectedRecord}
+          onFormSubmit={handleFormSubmit}
+        />
       </div>
     </div>
   );

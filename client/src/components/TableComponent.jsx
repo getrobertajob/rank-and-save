@@ -1,6 +1,7 @@
 // imports
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Table from "react-bootstrap/Table";
 
 function TableComponent({ onSelectRecord, refreshTable }) {
   // declare use state
@@ -8,7 +9,7 @@ function TableComponent({ onSelectRecord, refreshTable }) {
   const [userVotes, setUserVotes] = useState(() => {
     // declare variable to store the votes from user state to make data persistant
     // loads initial votes from local storage on page load
-    const savedVotes = localStorage.getItem('userVotes');
+    const savedVotes = localStorage.getItem("userVotes");
     return savedVotes ? JSON.parse(savedVotes) : {};
   });
 
@@ -19,13 +20,15 @@ function TableComponent({ onSelectRecord, refreshTable }) {
 
   // to save votes to local storage when votes change
   useEffect(() => {
-    localStorage.setItem('userVotes', JSON.stringify(userVotes));
+    localStorage.setItem("userVotes", JSON.stringify(userVotes));
   }, [userVotes]);
 
   // function to query database for all records for html table
   const fetchRecords = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/records`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/records`
+      );
       setRecords(response.data);
     } catch (err) {
       console.error(err);
@@ -35,7 +38,9 @@ function TableComponent({ onSelectRecord, refreshTable }) {
   // function to handle when user clicks on title of record in html table
   const handleTitleClick = async (id) => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/records/${id}`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/records/${id}`
+      );
       onSelectRecord(response.data);
     } catch (err) {
       console.error(err);
@@ -59,7 +64,9 @@ function TableComponent({ onSelectRecord, refreshTable }) {
 
       const updatedVotes = record.Votes + voteChange;
 
-      await axios.put(`${process.env.REACT_APP_API_URL}/records/${id}`, { Votes: updatedVotes });
+      await axios.put(`${process.env.REACT_APP_API_URL}/records/${id}`, {
+        Votes: updatedVotes,
+      });
 
       // to update the votes stored in user state
       setUserVotes((prevVotes) => ({
@@ -74,7 +81,7 @@ function TableComponent({ onSelectRecord, refreshTable }) {
   };
 
   return (
-    <table className="Table">
+    <Table striped variant="success" className="Table">
       <thead>
         <tr>
           <th>Rank</th>
@@ -89,10 +96,10 @@ function TableComponent({ onSelectRecord, refreshTable }) {
             key={record._id}
             className={
               userVotes[record._id] === 1
-                ? 'upvoted'
+                ? "upvoted"
                 : userVotes[record._id] === -1
-                  ? 'downvoted'
-                  : ''
+                ? "downvoted"
+                : ""
             }
           >
             <td>{index + 1}</td>
@@ -100,14 +107,18 @@ function TableComponent({ onSelectRecord, refreshTable }) {
             <td>{record.Author}</td>
             <td>
               <button
-                className={`upvote ${userVotes[record._id] === 1 ? 'voted' : ''}`}
+                className={`upvote ${
+                  userVotes[record._id] === 1 ? "voted" : ""
+                }`}
                 onClick={() => handleVote(record._id, 1)}
                 disabled={userVotes[record._id] === 1}
               >
                 ▲
               </button>
               <button
-                className={`downvote ${userVotes[record._id] === -1 ? 'voted' : ''}`}
+                className={`downvote ${
+                  userVotes[record._id] === -1 ? "voted" : ""
+                }`}
                 onClick={() => handleVote(record._id, -1)}
                 disabled={userVotes[record._id] === -1}
               >
@@ -118,7 +129,7 @@ function TableComponent({ onSelectRecord, refreshTable }) {
           </tr>
         ))}
       </tbody>
-    </table>
+    </Table>
   );
 }
 
