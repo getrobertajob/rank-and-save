@@ -73,12 +73,12 @@ h1 {
 
 input[disabled],
 textarea[disabled] {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.822);
 }
 
 input[enabled],
 textarea[enabled] {
-  background-color: lightblue;
+  background-color: rgb(241, 146, 146);
 }
 
 .upvote.voted {
@@ -89,14 +89,15 @@ textarea[enabled] {
   color: red;
 }
 
-.upvote.voted, .upvote:disabled {
+.upvote.voted,
+.upvote:disabled {
   color: green;
 }
 
-.downvote.voted, .downvote:disabled {
+.downvote.voted,
+.downvote:disabled {
   color: red;
 }
-
 
 .upvoted {
   background-color: lightgreen;
@@ -106,10 +107,12 @@ textarea[enabled] {
   background-color: lightcoral;
 }
 
-.upvote.voted, .upvote:disabled {
+.upvote.voted,
+.upvote:disabled {
   color: green;
 }
 
-.downvote.voted, .downvote:disabled {
+.downvote.voted,
+.downvote:disabled {
   color: red;
 }
