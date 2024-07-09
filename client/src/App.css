@@ -1,9 +1,11 @@
+
 .App {
   text-align: center;
   margin: 0, auto;
   background-image: url(../public/Images/marble_green.jpeg);
-  background-size: cover;
+  background-size: 100% 100%;
   padding: 90px;
+  height: 100vh; 
 }
 
 .Banner img {
@@ -22,9 +24,19 @@ h1 {
   padding: 20px;
 }
 
-.Table {
+.table-container {
   width: 50%;
+  /* height: calc(100vh - 180px); Adjust height to match FormComponent */
+  height: 490px;
+  overflow-y: auto;
+  border: 1px solid black;
+}
+
+.Table {
+  width: 100%;
   border-collapse: collapse;
+  /* height: 100%; */
+
 }
 
 .Table th,
@@ -51,9 +63,10 @@ h1 {
 .Form {
   width: 45%;
   border: 1px black solid;
-  border-radius: 10px;
-  height: 370px;
-  padding: 10px;
+  background-color: #d1e7dd;
+  /* border-radius: 10px; */
+  height: 100%;
+  padding: 20px 15px 0 15px;
 }
 
 .form-buttons {
@@ -71,12 +84,21 @@ h1 {
   margin-bottom: 10px;
 }
 
+/* .inputGroup{
+  border: solid 1px black;
+} */
+
 .form-fields input,
 .form-fields textarea {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
 }
+
+/* button[disabled] {
+  color: white;
+  border: solid 5px red;
+} */
 
 input[disabled],
 textarea[disabled] {

@@ -23,6 +23,7 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
       setFormData(selectedRecord);
       setEditMode(false);
       setIsNew(false);
+      changeColor("white");
     }
   }, [selectedRecord]);
 
@@ -37,12 +38,14 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
     setFormData({ Title: "", Author: "", Description: "" });
     setEditMode(true);
     setIsNew(true);
+    changeColor("rgb(146, 218, 241)");
   };
 
   // function to handle if user clicks on the edit button
   // includes changing form inputs to editable
   const handleEdit = () => {
     setEditMode(true);
+    changeColor("rgb(146, 218, 241)");
   };
 
   // function to handle if user clicks on the delete button
@@ -54,6 +57,7 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
       setFormData({ Title: "", Author: "", Description: "" });
       setEditMode(false);
       setIsNew(false);
+      alert("Delete was successful");
       onFormSubmit();
     } catch (error) {
       setError(error.response.data.errors);
@@ -77,6 +81,7 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
       setIsNew(false);
       alert("Save was successful");
       onFormSubmit();
+      changeColor("white");
     } catch (error) {
       setError(error.response.data.errors);
     }
@@ -89,15 +94,16 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
           variant="primary"
           onClick={() => {
             handleNew();
-            changeColor("rgba(255, 255, 255, 0.822)");
+            // changeColor("rgba(255, 255, 255, 0.822)");
           }}
         >
           New
         </Button>
         <Button
           variant="info"
+          className="editBtn"
           onClick={() => {
-            changeColor("  rgb(146, 218, 241)");
+            // changeColor("  rgb(146, 218, 241)");
             handleEdit();
           }}
           disabled={!formData._id}
@@ -107,7 +113,9 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
         <Button
           variant="danger"
           onClick={() => {
-            handleDelete(changeColor("red"));
+            handleDelete(
+              // changeColor("red")
+            );
           }}
           disabled={!formData._id}
         >
@@ -117,7 +125,9 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
           variant="success"
           size="lg"
           onClick={() => {
-            handleSave(changeColor("rgba(255, 255, 255, 0.822)"));
+            handleSave(
+              // changeColor("rgba(255, 255, 255, 0.822)")
+            );
           }}
           disabled={!editMode}
         >
@@ -126,7 +136,7 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
       </div>
       <div className="form-fields">
         <label>
-          <InputGroup size="lg">
+          <InputGroup className="inputGroup" size="lg">
             <InputGroup.Text id="inputGroup-sizing-lg">Title:</InputGroup.Text>
             <Form.Control
               name="Title"
@@ -167,6 +177,7 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
               value={formData.Description}
               onChange={handleChange}
               disabled={!editMode}
+              rows="8"
             />
           </InputGroup>
           <p>{error.Description?.message}</p>
