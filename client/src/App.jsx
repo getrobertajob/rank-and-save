@@ -5,8 +5,7 @@ import FormComponent from "./components/FormComponent.jsx";
 
 function App() {
   const [selectedRecord, setSelectedRecord] = useState(null);
-  const [refreshTable, setRefreshTable] = useState(false);
-
+//test
   const handleSelectRecord = (record) => {
     setSelectedRecord(record);
   };
