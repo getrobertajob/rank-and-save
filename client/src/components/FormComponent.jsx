@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 
-function FormComponent({ selectedRecord, onFormSubmit }) {
+function FormComponent({ selectedRecord, onFormSubmit, error, setError }) {
   // declare use state
   const [formData, setFormData] = useState({
     Title: "",
@@ -14,8 +14,8 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
   });
   const [editMode, setEditMode] = useState(false);
   const [isNew, setIsNew] = useState(false);
-  const [error, setError] = useState({});
   const [color, changeColor] = useState("white");
+  
   // to check if user has clicked on a record in html table yet
   // and if so then populates form with data and sets use state
   useEffect(() => {
@@ -38,6 +38,7 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
     setFormData({ Title: "", Author: "", Description: "" });
     setEditMode(true);
     setIsNew(true);
+    setError({});
     changeColor("rgb(146, 218, 241)");
   };
 
@@ -45,6 +46,7 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
   // includes changing form inputs to editable
   const handleEdit = () => {
     setEditMode(true);
+    setError({});
     changeColor("rgb(146, 218, 241)");
   };
 
@@ -57,6 +59,7 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
       setFormData({ Title: "", Author: "", Description: "" });
       setEditMode(false);
       setIsNew(false);
+      setError({});
       alert("Delete was successful");
       onFormSubmit();
     } catch (error) {
@@ -64,10 +67,26 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
     }
   };
 
+  // function to validate form data
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.Title) newErrors.Title = { message: "Title is required" };
+    if (!formData.Author) newErrors.Author = { message: "Author is required" };
+    if (!formData.Description) newErrors.Description = { message: "Description is required" };
+    return newErrors;
+  };
+
   // function to handle if user clicks on the save button
-  // includes popup to confirm save was sucessful
+  // includes popup to confirm save was successful
   const handleSave = async () => {
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setError(validationErrors);
+      return;
+    }
+
     try {
+      setError({});
       if (isNew) {
         await axios.post(`${process.env.REACT_APP_API_URL}/records`, formData);
       } else {
@@ -92,31 +111,21 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
       <div className="form-buttons">
         <Button
           variant="primary"
-          onClick={() => {
-            handleNew();
-            // changeColor("rgba(255, 255, 255, 0.822)");
-          }}
+          onClick={handleNew}
         >
           New
         </Button>
         <Button
           variant="info"
           className="editBtn"
-          onClick={() => {
-            // changeColor("  rgb(146, 218, 241)");
-            handleEdit();
-          }}
+          onClick={handleEdit}
           disabled={!formData._id}
         >
           Edit
         </Button>
         <Button
           variant="danger"
-          onClick={() => {
-            handleDelete(
-              // changeColor("red")
-            );
-          }}
+          onClick={handleDelete}
           disabled={!formData._id}
         >
           Delete
@@ -124,11 +133,7 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
         <Button
           variant="success"
           size="lg"
-          onClick={() => {
-            handleSave(
-              // changeColor("rgba(255, 255, 255, 0.822)")
-            );
-          }}
+          onClick={handleSave}
           disabled={!editMode}
         >
           Save
@@ -149,7 +154,7 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
               disabled={!editMode}
             />
           </InputGroup>
-          <p>{error.Title?.message}</p>
+          <p className="error-message">{error.Title?.message}</p>
         </label>
         <label>
           <InputGroup size="lg">
@@ -164,7 +169,7 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
               disabled={!editMode}
             />
           </InputGroup>
-          <p>{error.Author?.message}</p>
+          <p className="error-message">{error.Author?.message}</p>
         </label>
         <label>
           <InputGroup>
@@ -180,7 +185,7 @@ function FormComponent({ selectedRecord, onFormSubmit }) {
               rows="8"
             />
           </InputGroup>
-          <p>{error.Description?.message}</p>
+          <p className="error-message">{error.Description?.message}</p>
         </label>
       </div>
     </div>

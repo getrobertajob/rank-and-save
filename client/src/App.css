@@ -145,3 +145,7 @@ textarea[enabled] {
 .downvote:disabled {
   color: red;
 }
+
+.error-message {
+  color: red;
+}
