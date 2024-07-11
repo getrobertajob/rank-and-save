@@ -1,5 +1,7 @@
+// imports
 import React from 'react';
 
+// component to display the banner at the top of the page
 function Banner() {
   return (
     <div className="Banner">

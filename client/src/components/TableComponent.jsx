@@ -1,3 +1,4 @@
+// imports
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
@@ -9,6 +10,7 @@ function TableComponent({ onSelectRecord, refreshTable }) {
     return savedVotes ? JSON.parse(savedVotes) : {};
   });
 
+  // declare use state
   useEffect(() => {
     fetchRecords();
   }, [refreshTable]);
@@ -17,6 +19,7 @@ function TableComponent({ onSelectRecord, refreshTable }) {
     localStorage.setItem("userVotes", JSON.stringify(userVotes));
   }, [userVotes]);
 
+  // function to load all records
   const fetchRecords = async () => {
     try {
       const response = await axios.get(
@@ -28,6 +31,7 @@ function TableComponent({ onSelectRecord, refreshTable }) {
     }
   };
 
+  // function to handle clicking on title of record to get one record
   const handleTitleClick = async (id) => {
     try {
       const response = await axios.get(
@@ -39,6 +43,7 @@ function TableComponent({ onSelectRecord, refreshTable }) {
     }
   };
 
+  // function to handle when user clicks on a vote button
   const handleVote = async (id, change) => {
     try {
       const record = records.find((record) => record._id === id);
