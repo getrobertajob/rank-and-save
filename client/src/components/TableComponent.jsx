@@ -23,7 +23,7 @@ function TableComponent({ onSelectRecord, refreshTable }) {
   const fetchRecords = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/records`
+        `${process.env.REACT_APP_API_URL}/records/`
       );
       setRecords(response.data);
     } catch (err) {
@@ -35,7 +35,7 @@ function TableComponent({ onSelectRecord, refreshTable }) {
   const handleTitleClick = async (id) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/records/${id}`
+        `${process.env.REACT_APP_API_URL}/records/${id}/`
       );
       onSelectRecord(response.data);
     } catch (err) {
@@ -58,7 +58,7 @@ function TableComponent({ onSelectRecord, refreshTable }) {
 
       const updatedVotes = record.Votes + voteChange;
 
-      await axios.put(`${process.env.REACT_APP_API_URL}/records/${id}`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/records/${id}/`, {
         Votes: updatedVotes,
       });
 
