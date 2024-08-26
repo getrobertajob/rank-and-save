@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/configMongooseDB.js";
 import recordRoutes from "./routes/recordRoutes.js";
 import cors from "cors"; // Import cors
-// testing git
+// testing git again
 dotenv.config();
 
 const app = express();
