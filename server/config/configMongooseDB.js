@@ -7,7 +7,7 @@ dotenv.config();
 const MONGODB_URI = process.env.MONGODB_URI;
 
 // function to connect to DB
-export const dbConnect = async () => {
+export const connectDB = async () => {
   try {
     await connect(MONGODB_URI, {
       dbName: "MST",
