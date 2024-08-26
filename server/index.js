@@ -1,16 +1,16 @@
 import express from "express";
 import dotenv from "dotenv";
-import connectDB from "./config/configMongooseDB.js";
-import recordRoutes from "./routes/recordRoutes.js";
 import cors from "cors"; // Import cors
-// testing git again6
-dotenv.config();
+// import connectDB from "./config/configMongooseDB.js";
+import { connectDB } from "./config/configMongooseDB.js";
+import recordRoutes from "./routes/recordRoutes.js";
+connectDB();
 
 const app = express();
-connectDB();
 
 app.use(cors()); // Use cors middleware
 app.use(express.json());
+dotenv.config();
 
 app.use("/api", recordRoutes);
 
