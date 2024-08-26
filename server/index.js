@@ -14,5 +14,15 @@ dotenv.config();
 
 app.use("/api", recordRoutes);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
+// Add a route to display "server is running"
+app.get('/', (req, res) => {
+    res.send("server is running.");
+});
+
+app.listen(process.env.PORT, () => {
+    console.log("Listening on port: " + process.env.PORT);
+});
